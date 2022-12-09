@@ -38,7 +38,7 @@ namespace back_end.Migrations
                         name: "FK_Animals_AnimalTypes_AnimalTypeFK",
                         column: x => x.AnimalTypeFK,
                         principalTable: "AnimalTypes",
-                        principalColumn: "Id",
+                        principalColumn: "VisitId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -58,7 +58,7 @@ namespace back_end.Migrations
                         name: "FK_Visits_Animals_AnimalFK",
                         column: x => x.AnimalFK,
                         principalTable: "Animals",
-                        principalColumn: "Id",
+                        principalColumn: "VisitId",
                         onDelete: ReferentialAction.Cascade);
                 });
 

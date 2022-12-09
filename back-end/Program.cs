@@ -1,4 +1,6 @@
+using AutoMapper;
 using back_end.DB;
+using back_end.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,9 @@ services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 services.AddDbContext<VetClinicDbContext>(c => c.UseSqlServer(builder.Configuration["ConnectionString"]));
+services.AddScoped<IAnimalService, AnimalService>();
+services.AddScoped<IVisitService, VisitService>();
+services.AddSingleton<IMapper>(Mapping.Create());
 
 var app = builder.Build();
 
@@ -21,6 +26,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(policyBuilder => policyBuilder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 app.UseHttpsRedirection();
 

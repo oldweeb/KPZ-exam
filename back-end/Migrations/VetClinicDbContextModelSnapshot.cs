@@ -24,7 +24,7 @@ namespace back_end.Migrations
 
             modelBuilder.Entity("back_end.Models.Animal", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("VisitId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -44,7 +44,7 @@ namespace back_end.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("Owner");
 
-                    b.HasKey("Id");
+                    b.HasKey("VisitId");
 
                     b.HasIndex("AnimalTypeFK");
 
@@ -53,9 +53,9 @@ namespace back_end.Migrations
                     b.ToTable("Animals");
                 });
 
-            modelBuilder.Entity("back_end.Models.AnimalType", b =>
+            modelBuilder.Entity("back_end.Models.Type", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("VisitId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -64,7 +64,7 @@ namespace back_end.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("Name");
 
-                    b.HasKey("Id");
+                    b.HasKey("VisitId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -74,7 +74,7 @@ namespace back_end.Migrations
 
             modelBuilder.Entity("back_end.Models.Visit", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("VisitId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -90,7 +90,7 @@ namespace back_end.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("Diagnosis");
 
-                    b.HasKey("Id");
+                    b.HasKey("VisitId");
 
                     b.HasIndex("AnimalFK");
 
@@ -99,13 +99,13 @@ namespace back_end.Migrations
 
             modelBuilder.Entity("back_end.Models.Animal", b =>
                 {
-                    b.HasOne("back_end.Models.AnimalType", "AnimalType")
+                    b.HasOne("back_end.Models.Type", "Type")
                         .WithMany()
                         .HasForeignKey("AnimalTypeFK")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AnimalType");
+                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("back_end.Models.Visit", b =>

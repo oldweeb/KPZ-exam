@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace back_end.Models
 {
@@ -22,6 +24,7 @@ namespace back_end.Models
         public string OwnerName { get; set; }
         [ForeignKey("AnimalTypeFK")]
         public AnimalType AnimalType { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
         public ICollection<Visit> Visits { get; set; }
     }
 }
