@@ -1,11 +1,17 @@
+using back_end.DB;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+var services = builder.Services;
+
+services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+services.AddEndpointsApiExplorer();
+services.AddSwaggerGen();
+services.AddDbContext<VetClinicDbContext>(c => c.UseSqlServer(builder.Configuration["ConnectionString"]));
 
 var app = builder.Build();
 
